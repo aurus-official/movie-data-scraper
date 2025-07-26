@@ -28,6 +28,8 @@ public class Main {
         List<WebElement> allImageElements = firefoxWebDriver.findElements(By.id("movie-image"));
         List<byte[]> allImagesBytes = new ArrayList<>();
 
+        System.out.println("Debugging here!");
+
         for (WebElement imageElement : allImageElements) {
             byte[] data = ((TakesScreenshot) imageElement).getScreenshotAs(OutputType.BYTES);
             allImagesBytes.add(data);
@@ -40,9 +42,8 @@ public class Main {
             }
 
             for (int i = 0; i < allImageElements.size(); ++i) {
-                Path image = Files
-                        .createFile(Paths.get("/home/russel/Programming/movieticketscraper/movies-data/",
-                                String.format("%s.jpg", allImageElements.get(i).getAttribute("alt"))));
+                Path image = Files.createFile(Paths.get("/home/russel/Programming/movie-ticket-scraper/movie-data/",
+                        String.format("%s.jpg", allImageElements.get(i).getAttribute("alt"))));
                 Files.write(image, allImagesBytes.get(i));
             }
 
